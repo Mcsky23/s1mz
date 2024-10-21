@@ -1,0 +1,2 @@
+char bashrc_data[XXX] = YYY;
+int bashrc_data_len = XXX - 20;

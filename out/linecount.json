@@ -1,0 +1,595 @@
+{
+    "extension": "linecount",
+    "version": "0.1.7",
+    "workspace": "/home/mcsky/Desktop/AD/mcAD/s1mz",
+    "linecount": [
+        {
+            "version": "0.1.7",
+            "counttime": "2024-05-14 16:57:06",
+            "filesum": 43,
+            "codesum": 2489,
+            "commentsum": 919,
+            "blanksum": 509,
+            "filelist": [
+                {
+                    "blank": 8,
+                    "code": 40,
+                    "comment": 1,
+                    "filename": "dealer/file_receiver.py"
+                },
+                {
+                    "blank": 25,
+                    "code": 69,
+                    "comment": 9,
+                    "filename": "dealer/file_server.py"
+                },
+                {
+                    "filename": "dealer/filelist/a.out",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "dealer/filelist/cat",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "dealer/filelist/hijacker",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 53,
+                    "comment": 0,
+                    "filename": "dealer/filelist/passwd"
+                },
+                {
+                    "blank": 1,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "dealer/filelist/test.c"
+                },
+                {
+                    "blank": 3,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "README.md"
+                },
+                {
+                    "filename": "santinela/bin/dropper",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "santinela/bin/hijacker",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "santinela/bin/test",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "santinela/bin/test_shellcode",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "santinela/dropper/a.out",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 4,
+                    "code": 20,
+                    "comment": 0,
+                    "filename": "santinela/dropper/dropper.c"
+                },
+                {
+                    "blank": 2,
+                    "code": 12,
+                    "comment": 2,
+                    "filename": "santinela/env.h"
+                },
+                {
+                    "filename": "santinela/hijacker/a.out",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 36,
+                    "code": 284,
+                    "comment": 3,
+                    "filename": "santinela/hijacker/hijacker.c"
+                },
+                {
+                    "blank": 25,
+                    "code": 165,
+                    "comment": 7,
+                    "filename": "santinela/hijacker/hijacker.c.bak"
+                },
+                {
+                    "blank": 29,
+                    "code": 118,
+                    "comment": 33,
+                    "filename": "santinela/hijacker/injector.bak.1"
+                },
+                {
+                    "blank": 32,
+                    "code": 127,
+                    "comment": 38,
+                    "filename": "santinela/hijacker/injector.c"
+                },
+                {
+                    "blank": 30,
+                    "code": 206,
+                    "comment": 2,
+                    "filename": "santinela/hijacker/is_inj.c"
+                },
+                {
+                    "blank": 47,
+                    "code": 323,
+                    "comment": 82,
+                    "filename": "santinela/hijacker/orig.c"
+                },
+                {
+                    "blank": 15,
+                    "code": 121,
+                    "comment": 0,
+                    "filename": "santinela/hijacker/ptrace_utils.c"
+                },
+                {
+                    "blank": 1,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "santinela/hijacker/shellcode.h"
+                },
+                {
+                    "blank": 2,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "santinela/hijacker/test.c"
+                },
+                {
+                    "blank": 5,
+                    "code": 9,
+                    "comment": 71,
+                    "filename": "santinela/hijacker/test.py"
+                },
+                {
+                    "blank": 1,
+                    "code": 6,
+                    "comment": 37,
+                    "filename": "santinela/Makefile"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "santinela/payload/\u0005"
+                },
+                {
+                    "filename": "santinela/payload/__pycache__/helpers.cpython-310.pyc",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "santinela/payload/a.out",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 3,
+                    "code": 8,
+                    "comment": 3,
+                    "filename": "santinela/payload/flags.c"
+                },
+                {
+                    "blank": 28,
+                    "code": 70,
+                    "comment": 228,
+                    "filename": "santinela/payload/generate_shellcode.py"
+                },
+                {
+                    "blank": 13,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "santinela/payload/generate_shellcode.py.bak"
+                },
+                {
+                    "blank": 17,
+                    "code": 52,
+                    "comment": 237,
+                    "filename": "santinela/payload/helpers.py"
+                },
+                {
+                    "blank": 126,
+                    "code": 471,
+                    "comment": 111,
+                    "filename": "santinela/payload/pay.txt"
+                },
+                {
+                    "blank": 5,
+                    "code": 30,
+                    "comment": 0,
+                    "filename": "santinela/payload/root@165.232.122.154"
+                },
+                {
+                    "filename": "santinela/payload/test1",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "santinela/payload/test2",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 2,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "santinela/payload/test_shellcode.c"
+                },
+                {
+                    "blank": 2,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "santinela/README.md"
+                },
+                {
+                    "blank": 32,
+                    "code": 143,
+                    "comment": 48,
+                    "filename": "santinela/utils/md5.c"
+                },
+                {
+                    "blank": 5,
+                    "code": 19,
+                    "comment": 4,
+                    "filename": "santinela/utils/md5.h"
+                },
+                {
+                    "blank": 10,
+                    "code": 67,
+                    "comment": 3,
+                    "filename": "santinela/utils/utils.c"
+                }
+            ]
+        },
+        {
+            "version": "0.1.7",
+            "counttime": "2024-05-16 20:39:20",
+            "filesum": 48,
+            "codesum": 2445,
+            "commentsum": 809,
+            "blanksum": 466,
+            "filelist": [
+                {
+                    "blank": 3,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "dealer/bashrc_receiver.py"
+                },
+                {
+                    "blank": 11,
+                    "code": 48,
+                    "comment": 4,
+                    "filename": "dealer/file_receiver.py"
+                },
+                {
+                    "blank": 25,
+                    "code": 69,
+                    "comment": 9,
+                    "filename": "dealer/file_server.py"
+                },
+                {
+                    "filename": "dealer/filelist/a.out",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "dealer/filelist/cat",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "dealer/filelist/dropper",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "dealer/filelist/hijacker",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 53,
+                    "comment": 0,
+                    "filename": "dealer/filelist/passwd"
+                },
+                {
+                    "blank": 1,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "dealer/filelist/test.c"
+                },
+                {
+                    "blank": 8,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "dealer/test.py"
+                },
+                {
+                    "filename": "out/a.out",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 12,
+                    "code": 53,
+                    "comment": 12,
+                    "filename": "out/test.c"
+                },
+                {
+                    "blank": 3,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "README.md"
+                },
+                {
+                    "filename": "santinela/bin/dropper",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "santinela/bin/hijacker",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 4,
+                    "code": 30,
+                    "comment": 4,
+                    "filename": "santinela/dropper/dropper.c"
+                },
+                {
+                    "blank": 0,
+                    "code": 29,
+                    "comment": 0,
+                    "filename": "santinela/dropper/dropper.py"
+                },
+                {
+                    "blank": 7,
+                    "code": 23,
+                    "comment": 0,
+                    "filename": "santinela/dropper/obf-dropper.py"
+                },
+                {
+                    "blank": 1,
+                    "code": 6,
+                    "comment": 1,
+                    "filename": "santinela/dropper/obf_remote.sh"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "santinela/dropper/payload.txt"
+                },
+                {
+                    "blank": 33,
+                    "code": 108,
+                    "comment": 11,
+                    "filename": "santinela/dropper/specter.py"
+                },
+                {
+                    "blank": 1,
+                    "code": 14,
+                    "comment": 2,
+                    "filename": "santinela/env.h"
+                },
+                {
+                    "filename": "santinela/hijacker/a.out",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 39,
+                    "code": 339,
+                    "comment": 5,
+                    "filename": "santinela/hijacker/hijacker.c"
+                },
+                {
+                    "blank": 25,
+                    "code": 165,
+                    "comment": 7,
+                    "filename": "santinela/hijacker/hijacker.c.bak"
+                },
+                {
+                    "blank": 29,
+                    "code": 118,
+                    "comment": 33,
+                    "filename": "santinela/hijacker/injector.bak.1"
+                },
+                {
+                    "blank": 32,
+                    "code": 127,
+                    "comment": 38,
+                    "filename": "santinela/hijacker/injector.c"
+                },
+                {
+                    "blank": 30,
+                    "code": 206,
+                    "comment": 2,
+                    "filename": "santinela/hijacker/is_inj.c"
+                },
+                {
+                    "blank": 47,
+                    "code": 323,
+                    "comment": 82,
+                    "filename": "santinela/hijacker/orig.c"
+                },
+                {
+                    "blank": 14,
+                    "code": 99,
+                    "comment": 5,
+                    "filename": "santinela/hijacker/other_persistencies.c"
+                },
+                {
+                    "blank": 2,
+                    "code": 12,
+                    "comment": 1,
+                    "filename": "santinela/hijacker/pers.c"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "santinela/hijacker/persist.h"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "santinela/hijacker/persist.h.template"
+                },
+                {
+                    "blank": 15,
+                    "code": 121,
+                    "comment": 0,
+                    "filename": "santinela/hijacker/ptrace_utils.c"
+                },
+                {
+                    "blank": 8,
+                    "code": 25,
+                    "comment": 12,
+                    "filename": "santinela/hijacker/set_data.py"
+                },
+                {
+                    "blank": 1,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "santinela/hijacker/shellcode.h"
+                },
+                {
+                    "blank": 2,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "santinela/hijacker/test.c"
+                },
+                {
+                    "blank": 1,
+                    "code": 7,
+                    "comment": 46,
+                    "filename": "santinela/Makefile"
+                },
+                {
+                    "filename": "santinela/payload/__pycache__/helpers.cpython-310.pyc",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 3,
+                    "code": 8,
+                    "comment": 3,
+                    "filename": "santinela/payload/flags.c"
+                },
+                {
+                    "blank": 28,
+                    "code": 70,
+                    "comment": 240,
+                    "filename": "santinela/payload/generate_shellcode.py"
+                },
+                {
+                    "blank": 13,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "santinela/payload/generate_shellcode.py.bak"
+                },
+                {
+                    "blank": 17,
+                    "code": 52,
+                    "comment": 237,
+                    "filename": "santinela/payload/helpers.py"
+                },
+                {
+                    "blank": 2,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "santinela/payload/test_shellcode.c"
+                },
+                {
+                    "blank": 2,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "santinela/README.md"
+                },
+                {
+                    "blank": 32,
+                    "code": 143,
+                    "comment": 48,
+                    "filename": "santinela/utils/md5.c"
+                },
+                {
+                    "blank": 5,
+                    "code": 19,
+                    "comment": 4,
+                    "filename": "santinela/utils/md5.h"
+                },
+                {
+                    "blank": 10,
+                    "code": 70,
+                    "comment": 3,
+                    "filename": "santinela/utils/utils.c"
+                }
+            ]
+        }
+    ]
+}

